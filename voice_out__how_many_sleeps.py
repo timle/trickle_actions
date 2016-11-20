@@ -36,7 +36,7 @@ if sleeps_to_goal == 1:
     text_to_read = "One more sleep! Congratulations. Your almost there."
 
 if sleeps_to_goal > 1:
-    text_to_read = "You have to wait " + str(math.floor(sleeps_to_goal)) + " more sleeps until you reach your goal. Keep saving!"
+    text_to_read = "You have to wait " + str(int(math.floor(sleeps_to_goal))) + " more sleeps until you reach your goal. Keep saving!"
 
 
 
