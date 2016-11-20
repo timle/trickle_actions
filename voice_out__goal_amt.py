@@ -27,11 +27,11 @@ text_to_read = "I'm sorry, I my pigsternet isn't working right now. Please try a
 my_goal = str(data['goal'])
 
 if my_goal > 0:
-    text_to_read = "Your current goal is " + str(my_goal) + "dollars"
+    text_to_read = "Your current goal is " + str(my_goal) + " dollars"
 
 
 
 # switch this on deployment
-#os.system('pico2wave -w test.wav "' + sys.argv[1] + '" && aplay test.wav')
+os.system('pico2wave -w test.wav "' + text_to_read + '" && aplay test.wav')
 print('pico2wave -w test.wav "' + text_to_read + '" && aplay test.wav')
 
