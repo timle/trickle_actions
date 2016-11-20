@@ -1,7 +1,7 @@
 import os
 import random
 
-this = random.randint(1,5)
+this = random.randint(1,6)
 
 if this == 1:
 
@@ -26,4 +26,9 @@ if this == 4:
 if this == 5:
 
     text_to_read = "I once dreamt I was a muffler... I woke up exausted."
+    os.system('pico2wave -w test.wav "' + text_to_read + '" && aplay test.wav')
+
+if this == 6:
+
+    text_to_read = "How do pigs relax?... They go on pig... nicks..."
     os.system('pico2wave -w test.wav "' + text_to_read + '" && aplay test.wav')
