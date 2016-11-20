@@ -28,6 +28,6 @@ if (bal_val > 1):
 
 #switch this on deployment
 
-#os.system('pico2wave -w test.wav "' + sys.argv[1] + '" && aplay test.wav')
-print('pico2wave -w test.wav "' + text_to_read + '" && aplay test.wav')
+os.system('pico2wave -w test.wav "' + text_to_read + '" && aplay test.wav')
+#print('pico2wave -w test.wav "' + text_to_read + '" && aplay test.wav')
 
