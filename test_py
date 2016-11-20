@@ -16,7 +16,6 @@ url_1 = 'https://trickle-f05bc.firebaseio.com/kid.json'
 #url_goal = 'https://trickle-f05bc.firebaseio.com/kid/balance.json'
 #url_trickle_amnt = 'https://trickle-f05bc.firebaseio.com/kid/trickleAmount.json'
 
-import requests
 
 #response = requests.get(url_bal)
 #data = response.json()
@@ -36,20 +35,40 @@ goal_percent_int = int((float(data['balance']) / data['goal'])*100)
 
 import RPi.GPIO as GPIO
 import time
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(21,GPIO.OUT)
-print "LED on"
-GPIO.output(21,GPIO.HIGH)
-time.sleep(1)
-print "LED off"
-GPIO.output(21,GPIO.LOW)
+GPIO.setmode(GPIO.BCM) #sets pin numbering, dont change
 
+GPIO.setwarnings(False) # i dunno
+
+GPIO.setup(21,GPIO.OUT) # tells pi that we want to use this port
+GPIO.setup (20, GPIO.OUT)
+
+green = GPIO.PWM(21, 50)
+blue = GPIO.PWM (20, 40)
+green.start(1)
+
+
+## quick example, turn it on and off
+print "LEDs on" #feedback
+GPIO.output(21,GPIO.HIGH) #set output on to high
+time.sleep(1) # wait 1 second
+print "LED off"
+GPIO.output(21,GPIO.LOW) # set output to low
+# wait
+time.sleep(1)
+
+GPIO.output(21,GPIO.HIGH)
 while True:
     response = requests.get(url_1)
     data = response.json()
-    goal_percent_int = int((float(data['balance']) / data['goal']) * 100)
-
-    GPIO.output(21,goal_percent_int)
-
-    time.sleep(5)
+    goal_percent = int(float(data['balance']) / data['goal'] * 100)
+    goal_percent = min(goal_percent, 100)
+    print goal_percent
+    
+    # change brightness
+    GPIO.output(20,GPIO.LOW)
+    green.ChangeDutyCycle(goal_percent)
+    time.sleep(3)
+    if (goal_percent == 100):
+        GPIO.output(20, GPIO.HIGH)
+    
+    time.sleep(2)
